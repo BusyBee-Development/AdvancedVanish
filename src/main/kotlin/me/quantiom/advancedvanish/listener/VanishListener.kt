@@ -19,6 +19,7 @@ import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -236,6 +237,15 @@ object VanishListener : Listener {
 
         (event.entity as? Player)?.let { attacked ->
             if (attacked.isVanished() && !Config.getValueOrDefault("when-vanished.receive-damage-from-entities", false)) {
+                event.isCancelled = true
+            }
+        }
+    }
+
+    @EventHandler
+    private fun onDamage2(event: EntityDamageEvent) {
+        (event.entity as? Player)?.let { player ->
+            if (player.isVanished()) {
                 event.isCancelled = true
             }
         }
