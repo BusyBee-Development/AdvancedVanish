@@ -204,7 +204,7 @@ object AdvancedVanishAPI {
                 "advancedvanish.vanish"
             ))) return false
 
-        if (!Config.usingPriorities) return true
+        if (!Config.usingPriorities || PermissionsManager.handler == null) return true
 
         return PermissionsManager.handler!!.getVanishPriority(player) >= PermissionsManager.handler!!.getVanishPriority(target)
     }
