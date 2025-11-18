@@ -1,110 +1,67 @@
 # AdvancedVanish
-![license](https://img.shields.io/github/license/quantiom/EventHandler?color=%23b59e28&style=for-the-badge) ![made-with-kotlin](https://img.shields.io/badge/MADE%20WITH-KOTLIN-%23b59e28?style=for-the-badge&logo=java)  ![last-commit](https://img.shields.io/github/last-commit/quantiom/AdvancedVanish?color=%23b59e28&style=for-the-badge)  
 
-AdvancedVanish is a fully customizable and advanced vanish plugin made with Kotlin.  
-
-Spigot Resource: https://www.spigotmc.org/resources/advancedvanish.86036/
-
-GitBook: https://quantioms.gitbook.io/advancedvanish/
+A fully customizable and advanced vanish plugin for Spigot-based Minecraft servers.
 
 ## Features
-- Fully customizable through the [config](src/main/resources/config.yml). (70+ options)
-  - Messages
-  - Permissions
-  - Actions
-  - Hooks
-  - Placeholders
-  - Much more...
-- Vanished players are **completely** invisible, as if they are not even online.
-- Vanish priorities/levels ([more info](https://quantioms.gitbook.io/advancedvanish/features#vanish-priorities))
-  - Supports many different permissions plugins. (LuckPerms, PermissionsEx, bPermissions, GroupManager)
-- Many configurable hooks which provide support to other plugins.
-   - Essentials
-   - PlaceholderAPI
-   - DiscordSRV
-   - Dynmap
-   - Much more...
-- Togglable Actions when vanished (15+)
-- Commands:
-  - `/vanish` *- Toggle vanish.*
-  - `/vanish reload` *- Reloads the config and hooks*
-  - `/vanish priority` *- Displays your vanish priority.*
-  - `/vanish list` *- Dispalys a list of vanished players.*
-  - `/vanish status <player>` *- Check if a player is in vanish.*
-  - `/vanish set <player> <on/off>` *- Set another player's vanish.*
-  - `/vanish toggle <player>` *- Toggle another player's vanish.*
-  - `/vanish interact` *- Toggles interacting while in vanish*
-- Cross Server Vanish Synchronization
-- For the rest of the features, check out the [GitBook page](https://quantioms.gitbook.io/advancedvanish/).
 
-## Hooks
-In AdvancedVanish, there are many hooks which provide support to other plugins.  
-A full list of hooks with their descriptions can be found on the [GitBook page](https://quantioms.gitbook.io/advancedvanish/features#hooks).  
+-   Toggle vanish for yourself and other players.
+-   Control whether you can interact with blocks while vanished.
+-   View a list of vanished players.
+-   Check the vanish status of any player.
+-   Vanish priority system.
+-   Support for various popular plugins like LuckPerms, PlaceholderAPI, and Essentials.
 
-## Vanish Priority
-An explanation and guide of how to use vanish priorities can be found on the [GitBook page](https://quantioms.gitbook.io/advancedvanish/features#vanish-priorities).  
-*Note: Requires a supported permissions plugin to function*
+## Commands
 
-## API
-Before utilizing the API, make sure that the `AdvancedVanish` plugin is
-enabled, or add `depend: [AdvancedVanish]` or `softdepend: [AdvancedVanish]` to 
-your plugin's `plugin.yml`.
+| Command                         | Description                                  | Aliases                 |
+|---------------------------------|----------------------------------------------|-------------------------|
+| `/vanish`                       | Toggle your vanish status.                   | `/v`, `/advancedvanish` |
+| `/vanish version`               | Shows the plugin version.                    |                         |
+| `/vanish reload`                | Reloads the configuration and hooks.         |                         |
+| `/vanish interact`              | Toggle block interaction while vanished.     |                         |
+| `/vanish priority`              | Displays your vanish priority.               |                         |
+| `/vanish list`                  | Lists all vanished players.                  |                         |
+| `/vanish status <player>`       | Check if a player is vanished.               |                         |
+| `/vanish set <player> <on/off>` | Set another player's vanish status.          |                         |
+| `/vanish toggle <player>`       | Toggle another player's vanish status.       |                         |
+| `/vanish help`                  | Displays the help message.                   |                         |
 
-### Maven
-Add this repository to your `pom.xml`:
-```xml
-<repository>
-  <id>repsy</id>
-  <name>quantiom</name>
-  <url>https://repo.repsy.io/mvn/quantiom/minecraft</url>
-</repository>
-```
+## Permissions
 
-Add the dependency and replace `<version>...</version>` with the current version:
-```xml
-<dependency>
-  <groupId>me.quantiom</groupId>
-  <artifactId>advancedvanish</artifactId>
-  <version>1.2.7</version>
-</dependency>
-```
+| Permission                             | Description                                        | Default    |
+|----------------------------------------|----------------------------------------------------| ---------- |
+| `advancedvanish.vanish`                | Allows toggling your own vanish status.            | `true`     |
+| `advancedvanish.version-command`       | Allows using the `/vanish version` command.        | `true`     |
+| `advancedvanish.reload-config-command` | Allows using the `/vanish reload` command.         | `op`       |
+| `advancedvanish.interact-command`      | Allows using the `/vanish interact` command.       | `op`       |
+| `advancedvanish.priority-command`      | Allows using the `/vanish priority` command.       | `true`     |
+| `advancedvanish.list-command`          | Allows using the `/vanish list` command.           | `op`       |
+| `advancedvanish.status-command`        | Allows using the `/vanish status` command.         | `op`       |
+| `advancedvanish.set-other-command`     | Allows using the `/vanish set` command.            | `op`       |
+| `advancedvanish.toggle-other-command`  | Allows using the `/vanish toggle` command.         | `op`       |
+| `advancedvanish.help-command`          | Allows using the `/vanish help` command.           | `true`     |
+| `advancedvanish.see-vanished`          | Allows seeing vanished players.                    | `op`       |
 
-### Methods
-```kotlin
-AdvancedVanishAPI.vanishPlayer(player: Player): Unit
-AdvancedVanishAPI.unVanishPlayer(player: Player): Unit
-AdvancedVanishAPI.isPlayerVanished(player: Player): Boolean
-AdvancedVanishAPI.canSee(player: Player, target: Player): Boolean
-```
-### Extensions
-```kotlin
-Player.isVanished(): Boolean
-```
-### Events
-- `PrePlayerVanishEvent` - Gets called before vanishing a player, implements `Cancellable`.
-- `PlayerVanishEvent` - Gets called after a player vanishes.
-- `PrePlayerUnVanishEvent` - Gets called before a player unvanishes, implements `Cancellable`.
-- `PlayerUnVanishEvent` - Gets called after a player unvanishes.
-### Example Usage
-```kotlin
-class ExamplePlugin : JavaPlugin(), Listener {
-    override fun onEnable() {
-        this.server.pluginManager.registerEvents(this, this)
-    }
+*Note: The actual permission nodes are configurable in `config.yml`.*
 
-    @EventHandler
-    private fun onVanish(event: PlayerVanishEvent) {
-        val vanishedPlayers = AdvancedVanishAPI.vanishedPlayers
-            .map(Bukkit::getPlayer)
-            .joinToString(", ", transform = Player::getName)
+## Dependencies
 
-        this.logger.log(Level.INFO, "${event.player.name} has entered vanish.")
-        this.logger.log(Level.INFO, "Current vanished players: ${vanishedPlayers}.")
-    }
+AdvancedVanish has soft dependencies on the following plugins, which means it can integrate with them if they are installed, but they are not required for the plugin to run:
 
-    @EventHandler
-    private fun onUnVanish(event: PrePlayerUnVanishEvent) {
-        event.isCancelled = true // Don't let players unvanish
-    }
-}
-```
+-   LuckPerms
+-   PlaceholderAPI
+-   GroupManager
+-   PermissionsEx
+-   bPermissions
+-   DiscordSRV
+-   Dynmap
+-   squaremap
+-   LibsDisguises
+-   PlayerParticles
+-   Essentials
+-   ProtocolLib
+
+## Configuration
+
+The plugin is highly configurable. You can customize messages, permission nodes, and various other settings in the `config.yml` file.
+
