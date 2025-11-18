@@ -228,10 +228,19 @@ object VanishListener : Listener {
 
     @EventHandler
     private fun onDamage(event: EntityDamageByEntityEvent) {
-        (event.damager as? Player)?.let { damager ->
-            if (damager.isVanished() && !Config.getValueOrDefault("when-vanished.attack-entities", false) && !VanishStateManager.canInteract(damager)) {
-                damager.sendConfigMessage("cannot-attack-entities-while-vanished")
-                event.isCancelled = true
+        if (event.damager is Player) {
+            val damager = event.damager as Player
+            if (damager.isVanished()) {
+                if (event.entity is Player) {
+                    damager.sendConfigMessage("cannot-attack-entities-while-vanished")
+                    event.isCancelled = true
+                    return
+                }
+
+                if (!Config.getValueOrDefault("when-vanished.attack-entities", false) && !VanishStateManager.canInteract(damager)) {
+                    damager.sendConfigMessage("cannot-attack-entities-while-vanished")
+                    event.isCancelled = true
+                }
             }
         }
 
