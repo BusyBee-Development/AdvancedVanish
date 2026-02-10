@@ -19,8 +19,18 @@ class ServerListHook : IHook {
         override fun onPacketSending(event: PacketEvent?) {
             val ping = event!!.packet.serverPings.read(0) as WrappedServerPing
 
+            // Adjust the online player count
             ping.playersOnline -= AdvancedVanishAPI.vanishedPlayers.size
-            ping.setPlayers(ping.players.filter { AdvancedVanishAPI.vanishedPlayers.find { vUUID -> vUUID == it.uuid } == null })
+
+            // Try to filter vanished players from the sample list
+            // In MC 1.21+, this may fail due to NameAndId vs GameProfile conversion issues in ProtocolLib
+            try {
+                ping.setPlayers(ping.players.filter { AdvancedVanishAPI.vanishedPlayers.find { vUUID -> vUUID == it.uuid } == null })
+            } catch (_: IllegalArgumentException) {
+                // If we can't filter the player list due to ProtocolLib compatibility issues,
+                // at least the player count will be correct (adjusted above)
+                // This prevents the error spam while maintaining basic functionality
+            }
         }
     }
 
