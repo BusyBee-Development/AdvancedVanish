@@ -30,8 +30,7 @@ object SqlServerSyncStore : IServerSyncStore {
             val statement = this.connection!!.createStatement()
             statement.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS advancedvanish (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    uuid CHAR(36) NOT NULL,
+                    uuid CHAR(36) NOT NULL PRIMARY KEY,
                     state BOOLEAN NOT NULL
                 );
             """.trimIndent())
