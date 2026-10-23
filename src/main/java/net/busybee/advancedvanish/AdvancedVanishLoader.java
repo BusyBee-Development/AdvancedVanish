@@ -18,8 +18,8 @@ import java.util.List;
 public final class AdvancedVanishLoader implements PluginLoader {
 
     private static final List<String> LIBRARIES = List.of(
-            "redis.clients:jedis:7.5.0",
-            "com.zaxxer:HikariCP:7.0.2");
+            "redis.clients:jedis:7.5.3",
+            "com.zaxxer:HikariCP:7.1.0");
 
     /** Paper asks plugins not to download from Maven Central directly and provides this mirror instead. */
     private static final String DEFAULT_MIRROR = "https://maven-central.storage-download.googleapis.com/maven2";

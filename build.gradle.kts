@@ -19,7 +19,7 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.essentialsx.net/releases/")
-    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+    maven("https://repo.extendedclip.com/releases/")
     maven("https://nexus.scarsz.me/content/groups/public/")
     maven("https://repo.mikeprimm.com/")
     maven("https://mvn.lib.co.nz/public/")
@@ -31,24 +31,24 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:$paperApi")
 
     // Runtime libraries, downloaded by AdvancedVanishLoader (keep the versions in step with it)
-    compileOnly("redis.clients:jedis:7.5.0")
-    compileOnly("com.zaxxer:HikariCP:7.0.2")
+    compileOnly("redis.clients:jedis:7.5.3")
+    compileOnly("com.zaxxer:HikariCP:7.1.0")
     compileOnly("org.apache.logging.log4j:log4j-core:2.22.1")
 
     // Soft-dependency APIs
-    compileOnly("net.luckperms:api:5.4")
+    compileOnly("net.luckperms:api:5.5")
     compileOnly("net.essentialsx:EssentialsX:2.21.2") { isTransitive = false }
-    compileOnly("me.clip:placeholderapi:2.11.6") { isTransitive = false }
+    compileOnly("me.clip:placeholderapi:2.12.3") { isTransitive = false }
     compileOnly("com.discordsrv:discordsrv:1.30.5") { isTransitive = false }
-    compileOnly("us.dynmap:dynmap-api:3.6") { isTransitive = false }
-    compileOnly("us.dynmap:DynmapCoreAPI:3.6") { isTransitive = false }
-    compileOnly("xyz.jpenilla:squaremap-api:1.2.7") { isTransitive = false }
-    compileOnly("me.libraryaddict.disguises:libsdisguises:11.0.18") { isTransitive = false }
-    compileOnly("dev.esophose:playerparticles:8.6") { isTransitive = false }
+    compileOnly("us.dynmap:dynmap-api:3.8") { isTransitive = false }
+    compileOnly("us.dynmap:DynmapCoreAPI:3.8") { isTransitive = false } // DynmapAPI extends DynmapCommonAPI from here
+    compileOnly("xyz.jpenilla:squaremap-api:1.4.3") { isTransitive = false }
+    compileOnly("me.libraryaddict.disguises:libsdisguises:26.9.26") { isTransitive = false }
+    compileOnly("dev.esophose:playerparticles:8.13") { isTransitive = false }
 
     // Test
     testImplementation("io.papermc.paper:paper-api:$paperApi")
-    testImplementation(platform("org.junit:junit-bom:5.13.4"))
+    testImplementation(platform("org.junit:junit-bom:6.1.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
