@@ -31,5 +31,6 @@ priority needs, supports Folia. The built-in server-list and action-bar hooks wo
 
 ## Tested on
 
-The bot test suite runs against Paper 1.21.8, Folia 1.21.8 and Folia 26.2, and the code is compiled
-against the Paper 26.2 and 26.3 APIs to catch anything removed.
+The bot test suite runs against Paper 1.21.8, 1.21.11 and 26.2, and Folia 1.21.8 and 26.2, including
+MySQL cross-server sync. The code is also compiled against the Paper 26.2 and 26.3 APIs to catch
+anything removed.
