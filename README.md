@@ -1,67 +1,55 @@
 # AdvancedVanish
 
-A fully customizable and advanced vanish plugin for Spigot-based Minecraft servers.
+[![Wiki](https://img.shields.io/badge/Wiki-busybeedev.net-F5B800)](https://busybeedev.net/docs/advancedvanish/intro)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.com/invite/abdm29q7af)
+
+A vanish plugin for Minecraft Paper and Folia servers, from 1.21 to 26.x. Staff disappear from the world, tab list and server list, with configurable restrictions, LuckPerms vanish priority, silent chests and cross-server sync.
 
 ## Features
 
--   Toggle vanish for yourself and other players.
--   Control whether you can interact with blocks while vanished.
--   View a list of vanished players.
--   Check the vanish status of any player.
--   Vanish priority system.
--   Support for various popular plugins like LuckPerms, PlaceholderAPI, and Essentials.
+- Vanish that hides staff from players, the tab list, tab completion and the server list
+- Configurable rules for chat, blocks, items, damage, hunger and mob targeting while vanished
+- Vanish priority through LuckPerms, so senior staff can see junior staff
+- Silent chest, barrel and shulker box opening
+- Cross-server vanish sync over Redis or MySQL, and saved vanish states across restarts
+- Native Folia support, plus EssentialsX, PlaceholderAPI, DiscordSRV, dynmap and squaremap integrations
 
-## Commands
+## Requirements
 
-| Command                         | Description                                  | Aliases                 |
-|---------------------------------|----------------------------------------------|-------------------------|
-| `/vanish`                       | Toggle your vanish status.                   | `/v`, `/advancedvanish` |
-| `/vanish version`               | Shows the plugin version.                    |                         |
-| `/vanish reload`                | Reloads the configuration and hooks.         |                         |
-| `/vanish interact`              | Toggle block interaction while vanished.     |                         |
-| `/vanish priority`              | Displays your vanish priority.               |                         |
-| `/vanish list`                  | Lists all vanished players.                  |                         |
-| `/vanish status <player>`       | Check if a player is vanished.               |                         |
-| `/vanish set <player> <on/off>` | Set another player's vanish status.          |                         |
-| `/vanish toggle <player>`       | Toggle another player's vanish status.       |                         |
-| `/vanish help`                  | Displays the help message.                   |                         |
+- Minecraft 1.21+ (up to 26.x)
+- Paper or Folia
+- Java 21+
 
-## Permissions
+## Installation
 
-| Permission                             | Description                                        | Default    |
-|----------------------------------------|----------------------------------------------------| ---------- |
-| `advancedvanish.vanish`                | Allows toggling your own vanish status.            | `true`     |
-| `advancedvanish.version-command`       | Allows using the `/vanish version` command.        | `true`     |
-| `advancedvanish.reload-config-command` | Allows using the `/vanish reload` command.         | `op`       |
-| `advancedvanish.interact-command`      | Allows using the `/vanish interact` command.       | `op`       |
-| `advancedvanish.priority-command`      | Allows using the `/vanish priority` command.       | `true`     |
-| `advancedvanish.list-command`          | Allows using the `/vanish list` command.           | `op`       |
-| `advancedvanish.status-command`        | Allows using the `/vanish status` command.         | `op`       |
-| `advancedvanish.set-other-command`     | Allows using the `/vanish set` command.            | `op`       |
-| `advancedvanish.toggle-other-command`  | Allows using the `/vanish toggle` command.         | `op`       |
-| `advancedvanish.help-command`          | Allows using the `/vanish help` command.           | `true`     |
-| `advancedvanish.see-vanished`          | Allows seeing vanished players.                    | `op`       |
+1. Download the latest release from [GitHub Releases](https://github.com/BusyBee-Development/AdvancedVanish/releases).
+2. Drop the jar into your `plugins` folder.
+3. Restart the server.
 
-*Note: The actual permission nodes are configurable in `config.yml`.*
+## Documentation
 
-## Dependencies
+Everything else, including commands, permissions, configuration and integrations, is on the **[wiki](https://busybeedev.net/docs/advancedvanish/intro)**.
 
-AdvancedVanish has soft dependencies on the following plugins, which means it can integrate with them if they are installed, but they are not required for the plugin to run:
+- [Quick Start](https://busybeedev.net/docs/advancedvanish/quick-start)
+- [Commands & Permissions](https://busybeedev.net/docs/advancedvanish/commands-permissions)
+- [Configuration](https://busybeedev.net/docs/advancedvanish/main-configuration)
+- [FAQ](https://busybeedev.net/docs/advancedvanish/faq)
+- [Migration Guide](https://busybeedev.net/docs/advancedvanish/migration-guide)
+- [Developer API](https://busybeedev.net/docs/advancedvanish/developer-api)
 
--   LuckPerms
--   PlaceholderAPI
--   GroupManager
--   PermissionsEx
--   bPermissions
--   DiscordSRV
--   Dynmap
--   squaremap
--   LibsDisguises
--   PlayerParticles
--   Essentials
--   ProtocolLib
+## Support
 
-## Configuration
+- Bugs and feature requests: [GitHub Issues](https://github.com/BusyBee-Development/AdvancedVanish/issues)
+- Questions and help: [Discord](https://discord.com/invite/abdm29q7af)
 
-The plugin is highly configurable. You can customize messages, permission nodes, and various other settings in the `config.yml` file.
+## Credits
 
+- [quantiom](https://github.com/quantiom), original author of [AdvancedVanish](https://github.com/quantiom/AdvancedVanish)
+- [R00tB33rMan](https://github.com/R00tB33rMan), 1.20.4 updates and version detection
+- [tlm9201](https://github.com/tlm9201), UUID primary key fix for SQL sync
+- casper, Jaren Knodel, PhoenixZTT, Save, AjMaacc, BrianMay and Austin, contributions to the original project (vanished metadata, squaremap, join messages, infinite effects and more)
+- [djtmk](https://github.com/djtmk1), Paper and Folia rewrite, maintainer
+
+## License
+
+Licensed under the [MIT License](LICENSE). The original copyright notice from quantiom is kept.

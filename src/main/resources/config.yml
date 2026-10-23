@@ -5,15 +5,15 @@
 #  / ____ \ (_| |\ V / (_| | | | | (_|  __/ (_| |  \  / (_| | | | | \__ \ | | |   #
 # /_/    \_\__,_| \_/ \__,_|_| |_|\___\___|\__,_|   \/ \__,_|_| |_|_|___/_| |_|   #
 ###################################################################################
-# Made by quantiom, config made for v%PROJECT_VERSION%
+# Originally made by quantiom, maintained by BusyBee. Config made for v%PROJECT_VERSION%
 
-# GitBook page: https://quantioms.gitbook.io/advancedvanish/
+# Documentation: https://busybeedev.net/docs/advancedvanish/intro
 
 # Messages in this config use MiniMessage formatting
 # For example, the message "&4Hello &a&lWorld" would need to be "<red>Hello <green><bold>World"
-# Please check the documentation for more information: https://docs.adventure.kyori.net/minimessage/format.html
+# Format reference: https://docs.advntr.dev/minimessage/format.html
 
-# Automatically check for updates
+# Check GitHub for a newer release on startup (prints one console line if there is one)
 check-for-updates: true
 
 # WARNING: The three following options will be IGNORED if cross-server-support is enabled
@@ -30,7 +30,7 @@ keep-vanish-state: false
 keep-vanish-state-persistent: false
 
 # Cross-server vanish synchronization
-# Requires Redis or SQL
+# Requires Redis or MySQL/MariaDB. The client libraries are downloaded on first start.
 cross-server-support:
   enabled: false
   # Either "redis" or "sql"
@@ -45,6 +45,7 @@ cross-server-support:
     username: "root"
     password: ""
     database: "minecraft"
+    # The table is named <table-prefix>states (advancedvanish_states by default)
     table-prefix: "advancedvanish_"
 
 # Actions when players are vanished
@@ -61,9 +62,9 @@ when-vanished:
   open-and-use-chests: false
   pick-up-items: false
   drop-items: false
-  # Find potion effect names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
-  # Write each effect in this format: "NAME:AMPLIFIER"
-  # Example: "INVISIBILITY:2"
+  # Effects given while vanished (they last until unvanish). Write each one as "NAME:LEVEL",
+  # where NAME is a vanilla effect id such as INVISIBILITY, NIGHT_VISION, SPEED or JUMP_BOOST
+  # Example: "INVISIBILITY:2" gives Invisibility II
   give-potion-effects:
     - "INVISIBILITY:2"
     - "NIGHT_VISION:1"
@@ -71,7 +72,9 @@ when-vanished:
   mob-targeting: false
   fly:
     enable: true
-    keep-on-unvanish: false # The "keep-fly-on-unvanish" permission will override this if the player has that permission
+    # Players who could already fly before vanishing always keep it. The "keep-fly-on-unvanish"
+    # permission below also keeps flight for one player
+    keep-on-unvanish: false
 
 # Permissions
 permissions:
@@ -93,7 +96,7 @@ join-leave-messages:
   fake-join-message-on-unvanish:
     enable: false
     # Placeholders:
-    #   %priority% - The player's vanish priority
+    #   %player-name% - The player's name
     message: "<yellow>%player-name% has joined the game"
   fake-leave-message-on-vanish:
     enable: false
@@ -106,14 +109,13 @@ join-leave-messages:
 hooks:
   # Hides players from Essentials commands such as: /list, /whois, etc...
   essentials: true
-  # Requires ProtocolLib, removes vanished players from the server list (player count and players)
+  # Removes vanished players from the server list (player count and hover list). Built in, no ProtocolLib needed
   server-list: true
   # Requires PlaceholderAPI, adds multiple placeholders which are configurable
   # in the placeholders section of this config
   placeholders: true
   # Shows a message above the hotbar if a player is vanished
-  # The configurable message is in the messages section below.
-  # Does NOT require or use ActionBarAPI
+  # The configurable message is in the messages section below. Built in, no other plugin needed
   actionbar: true
   # Requires DiscordSRV, sends a fake leave and join message when vanished/unvanished
   # and also requires the fake-join-message-on-unvanish / fake-leave-message-on-vanish to be
@@ -140,28 +142,21 @@ placeholders:
   vanished-players: "vanished_players"
   player-count: "player_count"
 
-# Vanish Priority - Requires a supported permissions plugin to function
+# Vanish Priority - Requires LuckPerms
 #
-# Allows players with higher priorities to see vanished players from
-# lower priorities without the lower priority players being able to see
-# them, but they will still all be in vanish.
+# Players with the vanish permission can see vanished players whose priority
+# is equal to or lower than their own. Players with a lower priority cannot
+# see them. Without priority (disabled, or no LuckPerms) nobody can see
+# vanished players.
 #
-# Supported permissions plugins:
-#   - LuckPerms (recommended)
-#   - bPermissions
-#   - GroupManager
-#
-# To add the priority meta: (default is 0)
-#   LuckPerms: /lp user/group <user|group> meta set meta.<meta-key> <priority-num>
-#     (ex: /lp user quantiom meta set advancedvanish-priority 5)
-#   bPermissions: (/user OR /group) meta <meta-key> <priority-num>
-#     (ex: /user meta advancedvanish-priority 5)
-#   GroupManager: Add the permission <meta-key>.<priority-num>, and AdvancedVanish will use the highest number
-#     (ex: /manuaddp quantiom advancedvanish-priority.5)
+# To set a priority (default is 0):
+#   /lp user <user> meta set <meta-key> <number>
+#   /lp group <group> meta set <meta-key> <number>
+#   Example: /lp group admin meta set advancedvanish-priority 5
 #
 priority:
   enable: true
-  meta-key: "advancedvanish-priority" # will be meta.advancedvanish-priority.<num>
+  meta-key: "advancedvanish-priority"
 
 # Messages that are sent to players.
 # Set any message here to "" to display nothing.
@@ -174,7 +169,7 @@ messages:
   config-reloaded: "Successfully reloaded the config."
   # Placeholders:
   #   %version% - The plugin version
-  version-command: "This server is running AdvancedVanish <red>%version%<white> by quantiom"
+  version-command: "This server is running AdvancedVanish <red>%version%<white> (originally by quantiom, maintained by BusyBee)"
   vanish-on: "You are now in vanish."
   vanish-off: "You are no longer in vanish."
   cannot-chat-while-vanished: "You cannot chat while you are in vanish."

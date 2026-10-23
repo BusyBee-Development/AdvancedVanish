@@ -1,0 +1,84 @@
+name: AdvancedVanish
+version: '${version}'
+main: net.busybee.advancedvanish.AdvancedVanish
+loader: net.busybee.advancedvanish.AdvancedVanishLoader
+api-version: '1.21'
+description: '${description}'
+authors: [quantiom, BusyBee]
+website: https://busybeedev.net/docs/advancedvanish/intro
+folia-supported: true
+
+# Every integration is optional. join-classpath lets the hooks use each plugin's API.
+dependencies:
+  server:
+    LuckPerms:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    Essentials:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    DiscordSRV:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    dynmap:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    squaremap:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    LibsDisguises:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    PlayerParticles:
+      load: BEFORE
+      required: false
+      join-classpath: true
+
+# Default nodes. The nodes the plugin checks can be renamed in the permissions section of config.yml.
+permissions:
+  advancedvanish.vanish:
+    description: Toggle your own vanish, and see vanished players when vanish priority allows it.
+    default: op
+  advancedvanish.join-vanished:
+    description: Join the server already vanished.
+    default: op
+  advancedvanish.keep-fly:
+    description: Keep flight after unvanishing.
+    default: op
+  advancedvanish.version-command:
+    description: Use /vanish version.
+    default: op
+  advancedvanish.help-command:
+    description: Use /vanish help.
+    default: op
+  advancedvanish.reload-config-command:
+    description: Use /vanish reload.
+    default: op
+  advancedvanish.interact-command:
+    description: Use /vanish interact.
+    default: op
+  advancedvanish.priority-command:
+    description: Use /vanish priority.
+    default: op
+  advancedvanish.list-command:
+    description: Use /vanish list.
+    default: op
+  advancedvanish.status-command:
+    description: Use /vanish status.
+    default: op
+  advancedvanish.set-other-command:
+    description: Use /vanish set.
+    default: op
+  advancedvanish.toggle-other-command:
+    description: Use /vanish toggle.
+    default: op
